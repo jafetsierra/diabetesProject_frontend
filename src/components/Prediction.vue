@@ -1,24 +1,24 @@
 <template>
     <div class="make_p">
         <div class="container_make_p">
-        <h2>Make Diagnosis</h2>
+        <h2>Make a Diagnosis</h2>
             <form v-on:submit.prevent="submit"> 
         
-            <input type="number" v-model="form.prediction_data.age" placeholder="Age">
+            <input type="number" v-model="form.prediction_data.age" placeholder="Age (years)">
             <br>
-            <input type="number" v-model="form.prediction_data.bmi" placeholder="Bmi">
+            <input type="number" v-model="form.prediction_data.bmi" placeholder="Bmi (body mass index - kg/m^2)">
             <br>
-            <input type="number" v-model="form.prediction_data.bloodpreassure" placeholder="Bloodpressure">
+            <input type="number" v-model="form.prediction_data.bloodpreassure" placeholder="Bloodpressure (Diastolic blood pressure - mm Hg)">
             <br>
-            <input type="number" v-model="form.prediction_data.glucose" placeholder="Glucose">
+            <input type="number" v-model="form.prediction_data.glucose" placeholder="Glucose (plasma glucose concentration)">
             <br>
-            <input type="number" v-model="form.prediction_data.dpedigreefunc" placeholder="Diabetes P. function">
+            <input type="number" v-model="form.prediction_data.dpedigreefunc" placeholder="Diabetes P. function (based on family history, type 1 if there's 0 cases)">
             <br>
-            <input type="number" v-model="form.prediction_data.insulin" placeholder="Insulin">
+            <input type="number" v-model="form.prediction_data.insulin" placeholder="Insulin (2 hour serum insulin - mu U/ml)">
             <br>
-            <input type="number" v-model="form.prediction_data.pregnancies" placeholder="Pregnancies">
+            <input type="number" v-model="form.prediction_data.pregnancies" placeholder="Pregnancies (integer number)">
             <br>
-            <input type="number" v-model="form.prediction_data.tskinthickness" placeholder="Skinthickness">
+            <input type="number" v-model="form.prediction_data.tskinthickness" placeholder="Skinthickness (triceps skin flod - mm)">
             <br>
 
             <button type="submit">Diagnosis</button>
@@ -63,14 +63,9 @@ export default {
             this.form.prediction_data.user = userId;
             return axios.post(`https://diabetes-app-v-1.herokuapp.com/prediction/create/${userId}/`,this.form,{headers: {'Authorization': `Bearer ${token}`}})   
                 .then((response) => {
-                    let resultPrediction = response.data;
-                    if (resultPrediction.rta==true){
-                        alert("Posiblemente tienes Diabetes")
-                    }else{
-                        alert("Es poco o nada probable que tengas Diabetes")
-                        }
-
-                    this.$emit('completedPrediction', resultPrediction);
+                    let resultPrediction = response.data.rta;
+                    localStorage.setItem("Result", resultPrediction);
+                    this.$emit('completedPrediction');
                 })
                 .catch((error) => {
                     alert(error.data);

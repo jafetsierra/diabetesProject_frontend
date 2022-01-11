@@ -1,10 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router";
-import App from './App.vue';
-import LogIn from './components/LogIn.vue'
-import SignUp from './components/SignUp.vue'
-import Home from './components/Home.vue'
-import Prediction from './components/Prediction.vue'
-import PredictionList from './components/PredictionList.vue'
+import App              from './App.vue';
+import LogIn            from './components/LogIn.vue'
+import SignUp           from './components/SignUp.vue'
+import Home             from './components/Home.vue'
+import Prediction       from './components/Prediction.vue'
+import PredictionList   from './components/PredictionList.vue'
+import PredictionResult from './components/PredictionResult.vue'
+
 const routes = [{
     path: '/',
     name: 'root',
@@ -29,6 +31,11 @@ const routes = [{
     path: '/user/prediction',
     name: "prediction",
     component: Prediction
+  },
+  {
+    path: '/user/prediction/result',
+    name: "predictionResult",
+    component: PredictionResult
   },
   {
     path: '/user/predictionlist',

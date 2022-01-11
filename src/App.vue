@@ -25,6 +25,7 @@
         v-on:completedLogIn="completedLogIn"
         v-on:completedSignUp="completedSignUp"
         v-on:logOut="logOut"
+        v-on:completedPrediction="completedPrediction"
         >
       </router-view>
     </div>
@@ -72,9 +73,8 @@ export default {
     loadPrediction: function() {
       this.$router.push({ name: "prediction" });
     },
-    completedPrediction: function(data) {
-
-      alert("Registro Exitoso");
+    completedPrediction: function() {
+      this.$router.push({ name: "predictionResult" });
     },
     loadPredictions: function() {
       this.$router.push({ name: "predictionlist" });
