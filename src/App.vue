@@ -10,28 +10,35 @@
             </a>
           </a>
           <ul class="nav nav-pills">
-            <li class="nav-item"><button type="button" class="btn btn-outline-primary" v-if="is_auth" v-on:click="loadHome">Home</button></li>
-            <li class="nav-item"><button type="button" class="btn btn-outline-success" v-if="is_auth" v-on:click="loadPrediction">Make a Diagnosis</button></li>
-            <li class="nav-item"><button type="button" class="btn btn-outline-success" v-if="is_auth" v-on:click="loadPredictions">My Diagnostics</button></li>
-            <li class="nav-item"><button type="button" class="btn btn-outline-danger" v-if="is_auth" v-on:click="logOut">LogOut</button></li>
-            <li class="nav-item"><button type="button" class="btn btn-outline-primary" v-if="!is_auth" v-on:click="loadLogIn">LogIn</button></li>
-            <li class="nav-item"><button type="button" class="btn btn-outline-success" v-if="!is_auth" v-on:click="loadSignUp">SignUp</button></li>
+            <li class="nav-item"><button type="button" class="btn btn-primary btn-lg" v-if="is_auth" v-on:click="loadHome">Home</button></li>
+            <li class="nav-item"><button type="button" class="btn btn-success btn-lg" v-if="is_auth" v-on:click="loadPrediction">Make a Diagnosis</button></li>
+            <li class="nav-item"><button type="button" class="btn btn-secondary btn-lg" v-if="is_auth" v-on:click="loadPredictions">My Diagnostics</button></li>
+            <li class="nav-item"><button type="button" class="btn btn-danger btn-lg" v-if="is_auth" v-on:click="logOut">LogOut</button></li>
+            <li class="nav-item"><button type="button" class="btn btn-primary btn-lg" v-if="!is_auth" v-on:click="loadLogIn">LogIn</button></li>
+            <li class="nav-item"><button type="button" class="btn btn-success btn-lg" v-if="!is_auth" v-on:click="loadSignUp">SignUp</button></li>
           </ul>
         </header>
       </div>
     </div>
     <div class="main-component">
-      <router-view
-        v-on:completedLogIn="completedLogIn"
-        v-on:completedSignUp="completedSignUp"
-        v-on:logOut="logOut"
-        v-on:completedPrediction="completedPrediction"
-        >
-      </router-view>
+      <transition
+        mode="out-in"
+        enter-active-class="animate__animated animate__fadeIn"
+        leave-active-class="animate__animated animate__fadeOut"
+      >
+        <router-view
+          v-on:completedLogIn="completedLogIn"
+          v-on:completedSignUp="completedSignUp"
+          v-on:logOut="logOut"
+          v-on:completedPrediction="completedPrediction"
+          >
+        </router-view>
+      </transition>
     </div>
 
     <div class="footer">
       <h2>Machine Learning algorithms for Diabetes Diagnosis</h2>
+      <h3>Build and developed by Jafet Sierra</h3>
     </div>
 
   </div>
@@ -138,7 +145,14 @@ text-align: center;
 }
 .footer h2{
   width: 100%;
-  height: 100%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.footer h3{
+  width: 100%;
+  height: 50%;
   display: flex;
   justify-content: center;
   align-items: center;

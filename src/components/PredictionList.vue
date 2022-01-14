@@ -1,6 +1,6 @@
 <template>
     <div class="table-wrapper-scroll-y my-custom-scrollbar">
-            <table class="table table-bordered table-striped mb-0">
+            <table  class="table table-hover">
                     <thead>
                         <tr>
                             <th scope="col">Age</th>
@@ -27,6 +27,7 @@
                             <td>{{diag.rta}}</td>
                         </tr>
                     </tbody>
+
             </table>
     </div>
 </template>
