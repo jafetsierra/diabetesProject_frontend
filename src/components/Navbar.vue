@@ -20,25 +20,18 @@
             <form class="d-flex">
                 <button class="btn btn-outline-danger"  type="button" v-if="is_auth" @click="logOut">LogOut</button>
                 <button class="btn btn-outline-success" type="button" v-if="!is_auth" @click="loadLogIn">LogIn</button>
-                <button class="btn btn-outline-primary" type="button" v-if="!is_auth" @click="loadSignUp"> SignUp</button>          
+                <button class="btn btn-outline-primary" type="button" v-if="!is_auth" @click="loadSignUp"> SignUp</button>
+                
             </form>
             </div>
         </div>
     </nav>
-    <div>
-      <router-view
-          v-on:completedLogIn="completedLogIn"
-          v-on:completedSignUp="completedSignUp"
-          v-on:logOut="logOut"
-          >
-        </router-view>
-    </div>
 
 </template>
 
 <script>
 export default {
-    name: "App",
+    name: 'Navbar',
     data: function(){
         return{
             is_auth: false
@@ -67,11 +60,10 @@ export default {
         },
         verifyAuth: function () {
             this.is_auth = localStorage.getItem("isAuth") || false;
-            if (this.is_auth == false)
-                this.$router.push({name: "LogIn"});
-                
-            else
+            if (this.is_auth == true)
                 this.$router.push({name: "Home"});
+            else
+                this.$router.push({name: "LogIn"});
         },
         completedLogIn: function(data) {
             localStorage.setItem("isAuth", true);
@@ -87,7 +79,7 @@ export default {
         },
     },
     created: function (){
-        this.verifyAuth();
+        this.verifyAuth()
     }
 }
 </script>
